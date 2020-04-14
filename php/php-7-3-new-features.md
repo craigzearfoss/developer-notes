@@ -157,7 +157,7 @@ echo array_key_last($a)
 - **gmp_kronecker** - computes the Kronecker symbol
   - gmp_kronecker ( mixed $a , mixed $b ) : int
 
-## new **JsonException**
+## New **JsonException**
 
 ## Default ftp transfer mode is now binary
 
