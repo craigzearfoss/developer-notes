@@ -1,0 +1,187 @@
+including a JavaScript file:
+	<script src="assets/scripts/app.js" defer type="module"></script>
+		type=“module” needed for using import and export
+export
+	export let apiKey = “dfsagsafgshg";
+		or
+	export default “dfsagsafgshg";
+		Only one default per file.
+
+import
+	import { apiKey } from "./util.js”;		// Note that for React projects you don’t need to specify the file extension
+		or with default
+	import apiKey from “./util.js”;
+		or with named exports you can group them into a JavaScript object
+	import * as util from “./util.js”;
+		You can also assign an alias.
+	import { apiKey as myKey } from “./util.js”;
+
+variables: Names can contain numbers, underscores (not common), and also numbers (but not as the first character). 
+	let userMessage = “Hello world”;
+	const systemMessage = “This is a tests”;   - Constants cannot change value.
+
+operators
+	+ - can be used for numbers and to concatenate strings.
+	==, <, >, <=, >=, ===   - for comparisons
+	
+functions
+	function greet(arg1, arg2, ...) {
+		// do stuff
+		return something   - optional, if no return is specifed than type void is returned.
+	}
+
+arrow functions
+
+	const greeting (arg1, arg2, ...) => {
+		// do stuff
+		return something   - optional, if no return is specifed than type void is returned.
+	}
+
+anonymous functions
+	export default function([arglist]) { // do something }
+	export default ([arglist]) => { // do something }	
+
+objects
+	const user = {
+		name: “Max”,
+		age: 34.
+		greet() {
+			console.log(`Hello ${this.name}‘);
+		}
+	}
+
+class - A blueprint that can late be used to create an object. (Class names should start with an uppercase character.)
+	class User {
+		constructor(name, age) {
+			this.name = name;
+			this.age = age;
+			greet() {
+				console.log(`Hi ${this.name}‘);
+			}
+		}
+	}
+	const user1 = new Usert(“Manuel”, 35);
+
+arrays - a special type of objects
+	const hobbies = [];
+
+	map()
+	-------
+		const editedHobbies = hobbies.map((item) => item + “!”);
+			of
+		const editedHobbies = hobbies.map((item) =>({ test:  item }));
+
+	find()
+	------
+
+	findIndex()
+	------------
+		const index = hobbies.findIndex((item) => {
+			return item === "Sports";
+		});
+			or could be shortened to
+		const index = hobbies.findIndex((item) => item === "Sports");
+
+	filter()
+	-------
+
+	reduce()
+	----------
+
+	concat()
+	----------
+
+	slice()
+	-------
+
+	splice()
+	---------
+
+
+destructuring
+	const [firstName, lastName] = [“Max”, “Scharzmuller”];
+		or with objects (The variable names must match the properties.)
+	const {name, age} = {
+		name: “Max”,
+		age: 34
+	};
+		or you could assign alias to the property names
+	const {name: userName, age} = {
+		name: “Max”,
+		age: 34
+	};
+	
+spread operator - pulls out values from an array and adds them as comma separated values to a new array
+	const hobbies = [“Sports”, “Cooking”];
+	const newHobbies = [“Reading”];
+	mergedHobbies = [...hobbies, ...newHobbies];
+
+	You can also use the spread operator on objects.
+		const user = {
+			name: “Max”,
+			age: 34
+		};
+		const extendedUser = {
+			isAdmin: true,
+			...user
+		};
+	
+control structures:
+	if
+	--
+		if ( ) {
+			// do something
+		} else if (condiction) {
+			// do something
+		} else {
+			// do something
+		}
+
+	for
+	---
+		const hobbies = [“Sports”, “Cooking”];
+		for (const hobby of hobbies) {
+			console.log(hobby);
+		}
+			or
+		for (let i=0; i<hobbies.length;; i++) {
+			console.log(hobbies[i]);
+		}
+
+DOM manipulation
+	example
+		const list = document.querrySelector(‘ul’);
+		list.remove();
+
+using functions as values
+	function handleTimeout() {
+		console.log(“Time out!”);
+	}
+	const handleTimeout2( = () => {
+		console.log(“Time out 2!”);
+	}
+
+	setTimeout(handleTimeout, 2000);
+	setTimeout(handleTimeout2, 3000);
+	setTimeout(() => {
+		console.log(“More timing out...”);
+	}, 4000);
+
+	Another example with user functions:
+		function greeter(greetFn) {
+			greetFn():
+		}
+		greeter() => console.log(“Hi”);
+
+defining functions inside of functions
+	function init() {
+		function greet() {
+			console.log(“Hi!”);
+		}
+		greet();
+	}
+
+reference vs primitive balues
+	Objects are reference values.
+	For reference types you don’t store the value, but the address of that value in memory.
+	If you store an object in a const you can change properties of the object, but not replace it like you can with a primitive
