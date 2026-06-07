@@ -1,0 +1,22 @@
+## Create an AWS Target Group
+- A target group is what you want to point to.
+- **Settings**
+  - **Target type**
+    - Select "Instances".
+  - **Target group name**
+    - Give it a name like _zearfoss-tg_.
+  - **Protocol** and **Port**
+    - Keep at "HTTP" and "80".
+  - **IP address type**
+    - Select "IPv4"
+  - **VPC**
+    - Keep it as the VPC that you created.
+  - **Protocol version**
+  - Keep as "HTTP1".
+  - Keep the rest of the defaults.
+  - Click the orange "Next" button in the bottom right.
+    - Select the instance the you want to point at.
+    - Click the "Include as pending below" button. (THIS IS VERY IMPORTANT,)
+  - Click the orange "Next" button in the bottom right.
+  - Click the orange "Create target group" button in the bottom right.
+  

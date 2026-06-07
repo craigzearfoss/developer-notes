@@ -1,0 +1,67 @@
+## Create an AWS load balancer
+- [ ] Log into AWS console.
+- [ ] Select the region from the dropdown list in the top right corner.
+- [ ] Navigate to the EC2 page.
+- [ ] From the left menu select "Load Balancers" under "Load Balancing"
+- [ ] From the orange "Create load balancer" at the top right select "Create application load balancer"
+- **Basic configuration**
+    - **Load balancer name**
+        - Enter the name for the load balancer. Consider appending "-elb" on te end of it. (The name cannot be changed after the load balancer is created.)
+    - **Scheme**
+        - Select "Internet-facing"
+    - **Load balancer IP address type**
+        - Select "IPv4"
+- **Network mapping**
+  - **VPC**
+    - Select the VPC that you created.
+  - **IP pools**
+    - Do NOT select.
+  - **Availability Zones and subnets**
+    - Select at least two public subnets.
+    - **Security groups**
+      - Select the security group you made that allows for public access. (That is the one that allows HTTP and HTTPS access.)
+      - Select the security group that you created. (Not the default one.)
+    - **Listeners and routing**
+      - **Protocol** and **Port**
+        - Keep "HTTP" on Port "80".
+      - **Target group**
+        - If you haven't created any target groups click on "Create target group" and following the instructions in aws-target-group-create.md.
+        - Select the target group that you set up previously.
+        - Go back to the Create Application Load Balancer page and click on the refresh target groups icon.
+- Select you target group.
+- Keep the rest of the defaults.
+- Click on the orange "Create load balancer" in the bottom right corner. 
+- [ ] On the load balancer we want to add a listener for port 443.
+ - Click the "Add Listener" button at the bottom of the page.
+   - Set the protocol as "HTTPS" and the port at 443.
+   - **Default action**
+     - **Pre-routing action**
+       - Select "No pre-routing action".
+     - **Routing action**
+       - Select "Forward to target groups".
+       - **Target group**
+         - Select the target group that you created.
+   - Keep the rest of the defaults but under the "Secure listener settings" in the "Default SLL/TLS server certificate" click on "From ACM" for "Certificate source" and select the certificate you received at an earlier step.
+- [ ] Click on the orange "Add Listener" button at the bottom of the page.
+- [ ] Back on the load balancer page.
+  - We need to redirect port 80 to port 443.
+    - At the bottom of the page select the **HTTP:80** entry and the "Action" "Edit Listener".
+      - In the **Default action** section select "Redirect to URL"
+        - **Protocol**
+          - Select "HTTPS".
+        - **Port**
+          - Select "443".
+    - Click the orange "Save changes" button at the bottom of the page.
+- [ ] Go to the Hosted Zone for your domain.
+  - Fo to Route 53 dashboard.
+  - Click on "Hosted zones".
+  - Click on the domain.
+  - We want to add an alias to your load balancer.
+    - Click on the orange "Create record" button.
+    - Select "Alias".
+    - **Route traffic to**
+      - Select "Alias to Application and Classic Load Balancer".
+      - Select your region.
+      - Select your load balancer
+      - Leave everything else the same.
+      - Click on orange "Create records" button.
